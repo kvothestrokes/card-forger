@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from 'react'
 import type { Card, CardType } from '../../types'
 import { FACTIONS, RARITIES } from '../../data/factions'
-import { extractKeywords } from '../../utils/extractKeywords'
+import { extractKeywords, extractParsedKeywords } from '../../utils/extractKeywords'
 import {
   CARD_TYPES,
   ORDER_SUBTYPES,
@@ -37,6 +37,7 @@ type SectionKey =
   | 'orden'
   | 'efecto'
   | 'artwork'
+  | 'creditos'
 
 const DEFAULT_OPEN: Record<SectionKey, boolean> = {
   identidad: true,
@@ -48,6 +49,7 @@ const DEFAULT_OPEN: Record<SectionKey, boolean> = {
   orden: true,
   efecto: true,
   artwork: false,
+  creditos: true,
 }
 
 export default function CardEditor({ card, onChange }: Props) {
@@ -55,7 +57,7 @@ export default function CardEditor({ card, onChange }: Props) {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   const visible = useMemo(() => new Set(getCardTypeFields(card.tipo)), [card.tipo])
-  const keywords = useMemo(() => extractKeywords(card.texto_efecto ?? ''), [card.texto_efecto])
+  const keywords = useMemo(() => extractParsedKeywords(card.texto_efecto ?? ''), [card.texto_efecto])
 
   const toggle = (key: SectionKey) => setOpen((prev) => ({ ...prev, [key]: !prev[key] }))
 
@@ -225,7 +227,7 @@ export default function CardEditor({ card, onChange }: Props) {
             label="Ataque"
             value={card.ataque ?? 0}
             min={0}
-            max={999}
+            max={999_999}
             step={5}
             accent="#ef6a5e"
             onChange={(value) => patch({ ataque: value })}
@@ -234,7 +236,7 @@ export default function CardEditor({ card, onChange }: Props) {
             label="Escudo"
             value={card.escudo ?? 0}
             min={0}
-            max={999}
+            max={999_999}
             step={5}
             accent="#3b86e8"
             onChange={(value) => patch({ escudo: value })}
@@ -373,7 +375,8 @@ export default function CardEditor({ card, onChange }: Props) {
           footer={
             <p className="field-help">
               Las palabras entre <code>&lt; &gt;</code> se convierten en keywords. Admiten parámetros:{' '}
-              <code>&lt;Perforante 2&gt;</code>. Los símbolos no se imprimen en la carta.
+              <code>&lt;Perforante 2&gt;</code> y color hexadecimal:{' '}
+              <code>&lt;Chatarra#ff4d4d&gt;</code>. Los símbolos no se imprimen en la carta.
             </p>
           }
         />
@@ -390,6 +393,23 @@ export default function CardEditor({ card, onChange }: Props) {
         onToggle={() => toggle('artwork')}
       >
         <ArtworkUploader artwork={card.artwork} onChange={(url) => patch({ artwork: url })} />
+      </EditorSection>
+
+      <EditorSection
+        title="CRÉDITOS"
+        index={idx()}
+        hint="autor"
+        open={open.creditos}
+        onToggle={() => toggle('creditos')}
+      >
+        <TextField
+          label="Autor"
+          value={card.autor}
+          wide
+          maxLength={42}
+          onChange={(value) => patch({ autor: value })}
+          placeholder="KvotheStrokes"
+        />
       </EditorSection>
     </div>
   )

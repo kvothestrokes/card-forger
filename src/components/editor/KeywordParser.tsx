@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import type { RefObject } from 'react'
+import type { CSSProperties, RefObject } from 'react'
 import { KEYWORD_GROUPS, getKeywordTone } from '../../data/keywords'
+import { keywordColorStyle, type ParsedKeyword } from '../../utils/extractKeywords'
 
 interface Props {
-  detected: string[]
+  detected: ParsedKeyword[]
   textareaRef: RefObject<HTMLTextAreaElement>
   onInsert: (snippet: string, selectionStart: number, selectionEnd: number) => void
 }
@@ -38,11 +39,18 @@ export default function KeywordParser({ detected, textareaRef, onInsert }: Props
             Escribe una palabra entre <code>&lt; &gt;</code> para convertirla en keyword.
           </span>
         ) : (
-          detected.map((kw) => (
-            <span key={kw} className={`kw-badge sm tone-${getKeywordTone(kw)}`}>
-              {kw.toLocaleUpperCase('es')}
-            </span>
-          ))
+          detected.map((kw) => {
+            const custom = keywordColorStyle(kw.color)
+            return (
+              <span
+                key={kw.value}
+                className={custom ? 'kw-badge sm' : `kw-badge sm tone-${getKeywordTone(kw.value)}`}
+                style={custom as CSSProperties | undefined}
+              >
+                {kw.value.toLocaleUpperCase('es')}
+              </span>
+            )
+          })
         )}
       </div>
 

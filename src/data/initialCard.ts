@@ -21,6 +21,7 @@ export const INITIAL_CARD: Card = {
   chatarra_al_morir: 2,
   rareza: 'Rara',
   numero_coleccion: 'CP-006',
+  autor: 'KvotheStrokes',
 }
 
 /** Copia limpia para el botón RESET. */

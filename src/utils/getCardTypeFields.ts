@@ -11,13 +11,13 @@ export function getCardTypeFields(tipo: CardType): FieldGroup[] {
   const base: FieldGroup[] = ['identidad', 'clasificacion', 'economia']
   switch (tipo) {
     case 'Nave':
-      return [...base, 'combate', 'equipamiento', 'efecto', 'artwork']
+      return [...base, 'combate', 'equipamiento', 'efecto', 'artwork', 'creditos']
     case 'Orden':
-      return [...base, 'orden', 'efecto', 'artwork']
+      return [...base, 'orden', 'efecto', 'artwork', 'creditos']
     case 'Piloto':
-      return [...base, 'enlace', 'efecto', 'artwork']
+      return [...base, 'enlace', 'efecto', 'artwork', 'creditos']
     case 'Gear':
-      return [...base, 'equipamiento', 'efecto', 'artwork']
+      return [...base, 'equipamiento', 'efecto', 'artwork', 'creditos']
   }
 }
 

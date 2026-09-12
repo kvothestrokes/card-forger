@@ -6,6 +6,19 @@ interface Props {
   card: Card
 }
 
+function combatValueClass(value: number): string {
+  const digits = String(Math.abs(Math.trunc(value))).length
+  if (digits >= 6) return 'is-huge'
+  if (digits >= 5) return 'is-wide'
+  if (digits >= 4) return 'is-long'
+  return ''
+}
+
+function CombatValue({ value }: { value: number }) {
+  const sizeClass = combatValueClass(value)
+  return <b className={sizeClass || undefined}>{value}</b>
+}
+
 /** Zona inferior de datos. Su composición cambia según el tipo de carta. */
 export default function CardStats({ card }: Props) {
   if (card.tipo === 'Nave') {
@@ -24,11 +37,11 @@ export default function CardStats({ card }: Props) {
         <div className="stats-combat">
           <span className="stat stat-atk">
             <IconAtaque size={26} color="#ef6a5e" />
-            <b>{card.ataque ?? 0}</b>
+            <CombatValue value={card.ataque ?? 0} />
           </span>
           <span className="stat-divider" />
           <span className="stat stat-def">
-            <b>{card.escudo ?? 0}</b>
+            <CombatValue value={card.escudo ?? 0} />
             <IconEscudo size={26} color="#3b86e8" />
           </span>
         </div>

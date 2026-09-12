@@ -454,7 +454,21 @@
   font-size: 31px;
   font-weight: 700;
   line-height: 1;
+  font-variant-numeric: tabular-nums;
   animation: stat-pop 240ms ease;
+}
+
+.stat b.is-long {
+  font-size: 24px;
+}
+
+.stat b.is-wide {
+  font-size: 20px;
+}
+
+.stat b.is-huge {
+  font-size: 16px;
+  letter-spacing: -0.03em;
 }
 
 .stat-atk b {
@@ -523,7 +537,7 @@
   letter-spacing: 0.2em;
 }
 
-.footer-faction {
+.footer-author {
   color: var(--f-primary);
   text-shadow: 0 0 12px var(--f-glow);
 }

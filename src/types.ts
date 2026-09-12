@@ -59,6 +59,7 @@ export interface Card {
   /* --- Metadatos de colección --- */
   rareza: string
   numero_coleccion: string
+  autor: string
 
   /* --- Arte (object URL en memoria, nunca se sube a ningún servidor) --- */
   artwork?: string
@@ -89,3 +90,4 @@ export type FieldGroup =
   | 'orden'
   | 'efecto'
   | 'artwork'
+  | 'creditos'

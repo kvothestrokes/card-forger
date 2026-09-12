@@ -71,7 +71,7 @@ const CardFrame = forwardRef<HTMLDivElement, Props>(function CardFrame({ card },
 
           <CardStats card={card} />
           <CardFaction
-            faccion={card.faccion}
+            autor={card.autor}
             rareza={card.rareza}
             numero={card.numero_coleccion}
           />

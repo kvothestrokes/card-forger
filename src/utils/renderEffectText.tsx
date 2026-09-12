@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react'
-import { tokenizeEffectText } from './extractKeywords'
+import type { CSSProperties, ReactNode } from 'react'
+import { keywordColorStyle, tokenizeEffectText } from './extractKeywords'
 import { getKeywordTone } from '../data/keywords'
 
 /**
@@ -17,11 +17,13 @@ export function renderEffectText(text: string): ReactNode {
   tokens.forEach((token, tokenIndex) => {
     if (token.kind === 'keyword') {
       const tone = getKeywordTone(token.value)
+      const custom = keywordColorStyle(token.color)
       nodes.push(
         <span
           key={`kw-${tokenIndex}`}
-          className={`kw-inline tone-${tone}`}
+          className={custom ? 'kw-inline' : `kw-inline tone-${tone}`}
           data-keyword={token.value}
+          style={custom as CSSProperties | undefined}
         >
           {token.value.toLocaleUpperCase('es')}
         </span>,
