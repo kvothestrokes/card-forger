@@ -111,7 +111,7 @@ export const FACTION_THEMES: Record<FactionId, FactionTheme> = {
   },
 }
 
-export const RARITIES = ['Común', 'Poco común', 'Rara', 'Épica', 'Legendaria']
+export const RARITIES = ['Común', 'Poco común', 'Rara', 'Épica', 'Legendaria', 'Única']
 
 export const RARITY_COLORS: Record<string, string> = {
   'Común': '#8f9bb0',
@@ -119,4 +119,5 @@ export const RARITY_COLORS: Record<string, string> = {
   'Rara': '#5b9dff',
   'Épica': '#b06bff',
   'Legendaria': '#ffb648',
+  'Única': '#d7dee8',
 }

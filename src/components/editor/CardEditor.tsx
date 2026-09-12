@@ -7,6 +7,7 @@ import {
   ORDER_SUBTYPES,
   ORDER_TIMINGS,
   SHIP_ROLES,
+  STATION_ROLES,
   applyTypeDefaults,
   getCardTypeFields,
 } from '../../utils/getCardTypeFields'
@@ -35,6 +36,7 @@ type SectionKey =
   | 'equipamiento'
   | 'enlace'
   | 'orden'
+  | 'estacion'
   | 'efecto'
   | 'artwork'
   | 'creditos'
@@ -47,6 +49,7 @@ const DEFAULT_OPEN: Record<SectionKey, boolean> = {
   equipamiento: true,
   enlace: true,
   orden: true,
+  estacion: true,
   efecto: true,
   artwork: false,
   creditos: true,
@@ -154,6 +157,7 @@ export default function CardEditor({ card, onChange }: Props) {
         <SegmentedField
           label="Tipo de carta"
           value={card.tipo}
+          wrap
           onChange={changeType}
           options={CARD_TYPES.map((tipo) => ({
             value: tipo,
@@ -168,6 +172,19 @@ export default function CardEditor({ card, onChange }: Props) {
             wrap
             onChange={(value) => patch({ rol: value })}
             options={SHIP_ROLES.map((rol) => ({
+              value: rol,
+              icon: <RoleIcon rol={rol} size={15} color="currentColor" />,
+            }))}
+          />
+        )}
+
+        {card.tipo === 'Estación' && (
+          <SegmentedField
+            label="Rol de estación"
+            value={card.rol ?? 'Base'}
+            wrap
+            onChange={(value) => patch({ rol: value })}
+            options={STATION_ROLES.map((rol) => ({
               value: rol,
               icon: <RoleIcon rol={rol} size={15} color="currentColor" />,
             }))}
@@ -190,30 +207,32 @@ export default function CardEditor({ card, onChange }: Props) {
       </EditorSection>
 
       {/* ---------- ECONOMÍA ---------- */}
-      <EditorSection
-        title="ECONOMÍA"
-        index={idx()}
-        hint="coste · heat"
-        open={open.economia}
-        onToggle={() => toggle('economia')}
-      >
-        <NumberField
-          label="Coste de recursos"
-          value={card.coste_recursos}
-          min={0}
-          max={20}
-          accent="#4d8cff"
-          onChange={(value) => patch({ coste_recursos: value })}
-        />
-        <NumberField
-          label="Coste de Heat"
-          value={card.coste_heat}
-          min={0}
-          max={20}
-          accent="#e07b32"
-          onChange={(value) => patch({ coste_heat: value })}
-        />
-      </EditorSection>
+      {visible.has('economia') && (
+        <EditorSection
+          title="ECONOMÍA"
+          index={idx()}
+          hint="coste · heat"
+          open={open.economia}
+          onToggle={() => toggle('economia')}
+        >
+          <NumberField
+            label="Coste de recursos"
+            value={card.coste_recursos}
+            min={0}
+            max={20}
+            accent="#4d8cff"
+            onChange={(value) => patch({ coste_recursos: value })}
+          />
+          <NumberField
+            label="Coste de Heat"
+            value={card.coste_heat}
+            min={0}
+            max={20}
+            accent="#e07b32"
+            onChange={(value) => patch({ coste_heat: value })}
+          />
+        </EditorSection>
+      )}
 
       {/* ---------- COMBATE ---------- */}
       {visible.has('combate') && (
@@ -358,7 +377,49 @@ export default function CardEditor({ card, onChange }: Props) {
         </EditorSection>
       )}
 
-      {/* ---------- EFECTO ---------- */}
+      {/* ---------- ESTACIÓN ---------- */}
+      {visible.has('estacion') && (
+        <EditorSection
+          title="ESTACIÓN"
+          index={idx()}
+          hint="hp · heat gauge"
+          open={open.estacion}
+          onToggle={() => toggle('estacion')}
+        >
+          <NumberField
+            label="HP actual"
+            value={card.hp ?? 0}
+            min={0}
+            max={40}
+            accent="#3ee0a0"
+            onChange={(value) => patch({ hp: value })}
+          />
+          <NumberField
+            label="HP máximo"
+            value={card.hp_max ?? 20}
+            min={1}
+            max={40}
+            accent="#3ee0a0"
+            onChange={(value) => patch({ hp_max: value })}
+          />
+          <NumberField
+            label="Heat actual"
+            value={card.heat_actual ?? 0}
+            min={0}
+            max={16}
+            accent="#e07b32"
+            onChange={(value) => patch({ heat_actual: value })}
+          />
+          <NumberField
+            label="Umbral de sobrecalentamiento"
+            value={card.heat_umbral ?? 10}
+            min={1}
+            max={16}
+            accent="#e07b32"
+            onChange={(value) => patch({ heat_umbral: value })}
+          />
+        </EditorSection>
+      )}
       <EditorSection
         title="EFECTO"
         index={idx()}

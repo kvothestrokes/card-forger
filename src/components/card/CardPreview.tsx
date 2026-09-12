@@ -1,9 +1,10 @@
 import { forwardRef, useEffect, useRef, useState } from 'react'
 import type { Card } from '../../types'
+import { CARD_SIZE_PORTRAIT, getCardSize } from '../../utils/getCardTypeFields'
 import CardFrame from './CardFrame'
 
-export const CARD_W = 420
-export const CARD_H = 588
+export const CARD_W = CARD_SIZE_PORTRAIT.w
+export const CARD_H = CARD_SIZE_PORTRAIT.h
 
 interface Props {
   card: Card
@@ -17,6 +18,7 @@ interface Props {
 const CardPreview = forwardRef<HTMLDivElement, Props>(function CardPreview({ card }, cardRef) {
   const stageRef = useRef<HTMLDivElement>(null)
   const [scale, setScale] = useState(1)
+  const { w, h } = getCardSize(card.tipo)
 
   useEffect(() => {
     const el = stageRef.current
@@ -25,7 +27,7 @@ const CardPreview = forwardRef<HTMLDivElement, Props>(function CardPreview({ car
     const measure = () => {
       const { width, height } = el.getBoundingClientRect()
       if (!width || !height) return
-      const next = Math.min((width - 24) / CARD_W, (height - 24) / CARD_H, 1.25)
+      const next = Math.min((width - 24) / w, (height - 24) / h, 1.25)
       setScale(Math.max(0.32, next))
     }
 
@@ -33,18 +35,18 @@ const CardPreview = forwardRef<HTMLDivElement, Props>(function CardPreview({ car
     const observer = new ResizeObserver(measure)
     observer.observe(el)
     return () => observer.disconnect()
-  }, [])
+  }, [w, h])
 
   return (
     <div className="card-stage" ref={stageRef}>
       <div className="stage-grid" aria-hidden="true" />
       <div
         className="card-scaler"
-        style={{ width: CARD_W * scale, height: CARD_H * scale }}
+        style={{ width: w * scale, height: h * scale }}
       >
         <div
           className="card-scaler-inner"
-          style={{ transform: `scale(${scale})`, width: CARD_W, height: CARD_H }}
+          style={{ transform: `scale(${scale})`, width: w, height: h }}
         >
           <CardFrame ref={cardRef} card={card} />
         </div>

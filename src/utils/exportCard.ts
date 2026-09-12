@@ -1,5 +1,5 @@
 import { toPng } from 'html-to-image'
-import { CARD_H, CARD_W } from '../components/card/CardPreview'
+import { CARD_SIZE_PORTRAIT } from './getCardTypeFields'
 
 const EXPORT_SCALE = 3
 
@@ -114,7 +114,10 @@ async function bakeCoverArtwork(root: HTMLElement): Promise<void> {
   )
 }
 
-function mountExportClone(source: HTMLElement): { clone: HTMLElement; dispose: () => void } {
+function mountExportClone(
+  source: HTMLElement,
+  size: { w: number; h: number },
+): { clone: HTMLElement; dispose: () => void } {
   const host = document.createElement('div')
   host.setAttribute('aria-hidden', 'true')
   host.className = 'card-export-host'
@@ -122,8 +125,8 @@ function mountExportClone(source: HTMLElement): { clone: HTMLElement; dispose: (
     'position:fixed',
     'left:-10000px',
     'top:0',
-    `width:${CARD_W}px`,
-    `height:${CARD_H}px`,
+    `width:${size.w}px`,
+    `height:${size.h}px`,
     'margin:0',
     'padding:0',
     'transform:none',
@@ -152,12 +155,16 @@ function mountExportClone(source: HTMLElement): { clone: HTMLElement; dispose: (
  * Exporta únicamente el nodo de la carta a PNG de alta resolución.
  * No incluye header, editor, fondo de la app ni controles.
  *
- * Se captura una copia a 420×588 (sin el scale del viewer) para que
- * badges, texto y artwork coincidan con lo que se ve en pantalla.
+ * Se captura una copia al tamaño intrínseco de la carta (sin el scale
+ * del viewer) para que badges, texto y artwork coincidan con la pantalla.
  */
-export async function exportCardToPng(node: HTMLElement, fileName: string): Promise<void> {
+export async function exportCardToPng(
+  node: HTMLElement,
+  fileName: string,
+  size: { w: number; h: number } = CARD_SIZE_PORTRAIT,
+): Promise<void> {
   const restoreBlobs = await inlineBlobImages(node)
-  const { clone, dispose } = mountExportClone(node)
+  const { clone, dispose } = mountExportClone(node, size)
 
   try {
     if (document.fonts?.ready) await document.fonts.ready
@@ -171,10 +178,10 @@ export async function exportCardToPng(node: HTMLElement, fileName: string): Prom
       skipFonts: true,
       skipAutoScale: true,
       backgroundColor: 'transparent',
-      width: CARD_W,
-      height: CARD_H,
-      canvasWidth: CARD_W,
-      canvasHeight: CARD_H,
+      width: size.w,
+      height: size.h,
+      canvasWidth: size.w,
+      canvasHeight: size.h,
       style: {
         transform: 'none',
         transformOrigin: 'top left',
@@ -182,8 +189,8 @@ export async function exportCardToPng(node: HTMLElement, fileName: string): Prom
         inset: 'auto',
         left: '0',
         top: '0',
-        width: `${CARD_W}px`,
-        height: `${CARD_H}px`,
+        width: `${size.w}px`,
+        height: `${size.h}px`,
       },
     })
 

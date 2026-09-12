@@ -275,7 +275,77 @@ export function IconMomento({ size = 24, className, color = 'currentColor' }: Ic
   )
 }
 
-/* Selector de icono por rol de nave */
+/* ESTACIÓN — anillo orbital */
+export function IconEstacion({ size = 24, className, color = 'currentColor' }: IconProps) {
+  return (
+    <svg {...base(size)} className={className} aria-hidden="true">
+      <ellipse cx="16" cy="16" rx="13" ry="5.5" fill="none" stroke={color} strokeWidth="2" />
+      <circle cx="16" cy="16" r="4.2" fill={color} />
+      <path d="M8 14 L8 10 H12" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" />
+      <path d="M24 18 L24 22 H20" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+/* BASE — plataforma */
+export function IconBase({ size = 24, className, color = 'currentColor' }: IconProps) {
+  return (
+    <svg {...base(size)} className={className} aria-hidden="true">
+      <path d="M6 22 H26 L22 26 H10 Z" fill={color} />
+      <path d="M11 22 V12 H21 V22" fill="none" stroke={color} strokeWidth="2.2" />
+      <rect x="14" y="6" width="4" height="7" fill={color} />
+    </svg>
+  )
+}
+
+/* ASTILLERO — dársena */
+export function IconAstillero({ size = 24, className, color = 'currentColor' }: IconProps) {
+  return (
+    <svg {...base(size)} className={className} aria-hidden="true">
+      <path d="M5 26 H27" stroke={color} strokeWidth="2.4" />
+      <path d="M8 26 V14 H12 V26 M20 26 V10 H24 V26" fill="none" stroke={color} strokeWidth="2.2" />
+      <path d="M12 16 H20" stroke={color} strokeWidth="2" />
+    </svg>
+  )
+}
+
+/* PUERTO — muelle anular */
+export function IconPuerto({ size = 24, className, color = 'currentColor' }: IconProps) {
+  return (
+    <svg {...base(size)} className={className} aria-hidden="true">
+      <circle cx="16" cy="16" r="11" fill="none" stroke={color} strokeWidth="2.2" />
+      <circle cx="16" cy="16" r="4" fill={color} />
+      <path d="M16 5 V12 M27 16 H20 M16 27 V20 M5 16 H12" stroke={color} strokeWidth="2" />
+    </svg>
+  )
+}
+
+/* RELÉ — baliza */
+export function IconRele({ size = 24, className, color = 'currentColor' }: IconProps) {
+  return (
+    <svg {...base(size)} className={className} aria-hidden="true">
+      <path d="M16 28 V14" stroke={color} strokeWidth="2.4" />
+      <circle cx="16" cy="10" r="4" fill={color} />
+      <path
+        d="M8 12 C8 6 24 6 24 12"
+        fill="none"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M5 16 C5 6 27 6 27 16"
+        fill="none"
+        stroke={color}
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        opacity="0.7"
+      />
+    </svg>
+  )
+}
+
+/* Selector de icono por rol de nave o estación */
 export function RoleIcon({ rol, size = 24, color }: { rol?: string; size?: number; color?: string }) {
   switch (rol) {
     case 'Caza':
@@ -292,6 +362,14 @@ export function RoleIcon({ rol, size = 24, color }: { rol?: string; size?: numbe
       return <IconTitan size={size} color={color} />
     case 'Soporte':
       return <IconSoporte size={size} color={color} />
+    case 'Base':
+      return <IconBase size={size} color={color} />
+    case 'Astillero':
+      return <IconAstillero size={size} color={color} />
+    case 'Puerto':
+      return <IconPuerto size={size} color={color} />
+    case 'Relé':
+      return <IconRele size={size} color={color} />
     case 'Acorazado':
     default:
       return <IconAcorazado size={size} color={color} />
@@ -307,6 +385,8 @@ export function CardTypeIcon({ tipo, size = 24, color }: { tipo: string; size?: 
       return <IconPiloto size={size} color={color} />
     case 'Gear':
       return <IconGear size={size} color={color} />
+    case 'Estación':
+      return <IconEstacion size={size} color={color} />
     default:
       return <IconAcorazado size={size} color={color} />
   }

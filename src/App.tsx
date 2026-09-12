@@ -5,6 +5,7 @@ import CardPreview from './components/card/CardPreview'
 import CardEditor from './components/editor/CardEditor'
 import DataPanel from './components/editor/DataPanel'
 import { buildFileName, exportCardToPng } from './utils/exportCard'
+import { getCardSize } from './utils/getCardTypeFields'
 import { getFactionTheme } from './utils/getFactionTheme'
 
 type MobileTab = 'preview' | 'editor'
@@ -38,14 +39,14 @@ export default function App() {
     if (!node || exporting) return
     setExporting(true)
     try {
-      await exportCardToPng(node, buildFileName(card.nombre, card.numero_coleccion))
+      await exportCardToPng(node, buildFileName(card.nombre, card.numero_coleccion), getCardSize(card.tipo))
       notify('PNG exportado')
     } catch {
       notify('No se pudo exportar la carta')
     } finally {
       setExporting(false)
     }
-  }, [card.nombre, card.numero_coleccion, exporting, notify])
+  }, [card.nombre, card.numero_coleccion, card.tipo, exporting, notify])
 
   return (
     <div className="app" data-faction={theme.short}>

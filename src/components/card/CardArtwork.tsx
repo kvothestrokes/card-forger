@@ -4,16 +4,19 @@ interface Props {
   artwork?: string
   theme: FactionTheme
   nombre: string
+  framed?: boolean
 }
 
 /**
  * Zona de arte. Sin imagen cargada dibuja un fondo procedural
  * (SVG inline) coherente con la facción, nunca un placeholder vacío.
  */
-export default function CardArtwork({ artwork, theme, nombre }: Props) {
+export default function CardArtwork({ artwork, theme, nombre, framed }: Props) {
+  const cls = `card-art${framed ? ' is-framed' : ''}`
+
   if (artwork) {
     return (
-      <div className="card-art">
+      <div className={cls}>
         <img className="card-art-img" src={artwork} alt={nombre} />
         <div className="card-art-vignette" />
         <div className="card-art-hud" />
@@ -22,7 +25,7 @@ export default function CardArtwork({ artwork, theme, nombre }: Props) {
   }
 
   return (
-    <div className="card-art">
+    <div className={cls}>
       <ProceduralArt theme={theme} />
       <div className="card-art-vignette" />
       <div className="card-art-hud" />

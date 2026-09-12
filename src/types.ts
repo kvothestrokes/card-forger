@@ -4,7 +4,9 @@
    simulador del TCG pueda consumir este JSON sin traducciones.
    ============================================================ */
 
-export type CardType = 'Nave' | 'Orden' | 'Piloto' | 'Gear'
+export type CardType = 'Nave' | 'Orden' | 'Piloto' | 'Gear' | 'Estación'
+
+export type StationRole = 'Base' | 'Astillero' | 'Puerto' | 'Relé'
 
 export type FactionId =
   | 'Imperio Galáctico'
@@ -65,6 +67,12 @@ export interface Card {
   restriccion_equipamiento?: string
   modificadores?: string
 
+  /* --- Estación --- */
+  hp?: number
+  hp_max?: number
+  heat_actual?: number
+  heat_umbral?: number
+
   /* --- Metadatos de colección --- */
   rareza: string
   numero_coleccion: string
@@ -97,6 +105,7 @@ export type FieldGroup =
   | 'equipamiento'
   | 'enlace'
   | 'orden'
+  | 'estacion'
   | 'efecto'
   | 'artwork'
   | 'creditos'
