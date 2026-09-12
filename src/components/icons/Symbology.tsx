@@ -89,6 +89,75 @@ export function IconSoporte({ size = 24, className, color = 'currentColor' }: Ic
   )
 }
 
+/* CORBETA — dardo compacto con aletas */
+export function IconCorbeta({ size = 24, className, color = 'currentColor' }: IconProps) {
+  return (
+    <svg {...base(size)} className={className} aria-hidden="true">
+      <path d="M16 3 L21 16 L16 14 L11 16 Z" fill={color} />
+      <path d="M8 18 L16 14.5 L24 18 L16 28 Z" fill={color} fillOpacity="0.7" />
+    </svg>
+  )
+}
+
+/* FRAGATA — casco largo con quilla */
+export function IconFragata({ size = 24, className, color = 'currentColor' }: IconProps) {
+  return (
+    <svg {...base(size)} className={className} aria-hidden="true">
+      <path
+        fill={color}
+        fillRule="evenodd"
+        d="M16 2 L24 12 L21 29 L16 25 L11 29 L8 12 Z M15 8 H17 V22 H15 Z"
+      />
+    </svg>
+  )
+}
+
+/* DESTRUCTOR — cuña de ataque con batería */
+export function IconDestructor({ size = 24, className, color = 'currentColor' }: IconProps) {
+  return (
+    <svg {...base(size)} className={className} aria-hidden="true">
+      <path
+        fill={color}
+        fillRule="evenodd"
+        d="M16 2 L28 13 L23 29 L16 24 L9 29 L4 13 Z M9.5 13.2 H22.5 V16 H9.5 Z M11.5 18.2 H20.5 V20.4 H11.5 Z"
+      />
+    </svg>
+  )
+}
+
+/* CRUCERO — hexágono alargado con puente */
+export function IconCrucero({ size = 24, className, color = 'currentColor' }: IconProps) {
+  return (
+    <svg {...base(size)} className={className} aria-hidden="true">
+      <path
+        fill={color}
+        fillRule="evenodd"
+        d="M9 4 H23 L29 16 L23 28 H9 L3 16 Z M14 7 H18 V16 H14 Z"
+      />
+    </svg>
+  )
+}
+
+/* TITÁN — fortaleza estelar */
+export function IconTitan({ size = 24, className, color = 'currentColor' }: IconProps) {
+  return (
+    <svg {...base(size)} className={className} aria-hidden="true">
+      <path
+        d="M11 3 H21 L29 11 V21 L21 29 H11 L3 21 V11 Z"
+        fill="none"
+        stroke={color}
+        strokeWidth="2.4"
+        strokeLinejoin="round"
+      />
+      <path
+        fill={color}
+        fillRule="evenodd"
+        d="M16 7 L25 16 L16 25 L7 16 Z M16 12.6 A3.4 3.4 0 1 0 16 19.4 A3.4 3.4 0 1 0 16 12.6 Z"
+      />
+    </svg>
+  )
+}
+
 /* GEAR (slot) — rombo */
 export function IconGear({ size = 24, className, color = 'currentColor', filled = true }: IconProps & { filled?: boolean }) {
   return (
@@ -211,6 +280,16 @@ export function RoleIcon({ rol, size = 24, color }: { rol?: string; size?: numbe
   switch (rol) {
     case 'Caza':
       return <IconCaza size={size} color={color} />
+    case 'Corbeta':
+      return <IconCorbeta size={size} color={color} />
+    case 'Fragata':
+      return <IconFragata size={size} color={color} />
+    case 'Destructor':
+      return <IconDestructor size={size} color={color} />
+    case 'Crucero':
+      return <IconCrucero size={size} color={color} />
+    case 'Titán':
+      return <IconTitan size={size} color={color} />
     case 'Soporte':
       return <IconSoporte size={size} color={color} />
     case 'Acorazado':

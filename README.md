@@ -54,7 +54,7 @@ y rellena los nuevos con valores razonables.
 
 ## Facciones
 
-Imperio Galáctico · Piratas · Xeno · CyberPunk · IA · SteamPunk
+Imperio Galáctico · Piratas · Xeno · CyberPunk · IA · SteamPunk · Neutral
 
 Cada facción inyecta variables CSS (`--f-primary`, `--f-accent`, `--f-glow`, …)
 que modifican bordes, acentos, glow y el arte procedural — sin alterar el layout.

@@ -7,6 +7,7 @@ export const FACTIONS: FactionId[] = [
   'CyberPunk',
   'IA',
   'SteamPunk',
+  'Neutral',
 ]
 
 export const FACTION_THEMES: Record<FactionId, FactionTheme> = {
@@ -93,6 +94,20 @@ export const FACTION_THEMES: Record<FactionId, FactionTheme> = {
     artFrom: '#3d2710',
     artTo: '#170e06',
     pattern: 'gears',
+  },
+  Neutral: {
+    id: 'Neutral',
+    short: 'NEU',
+    primary: '#c8cdd8',
+    accent: '#e8e4d8',
+    ink: '#f4f5f8',
+    border: '#6a7080',
+    glow: 'rgba(200,205,216,0.22)',
+    bgFrom: '#0a0b0e',
+    bgTo: '#16181e',
+    artFrom: '#2a2d36',
+    artTo: '#0c0d11',
+    pattern: 'stars',
   },
 }
 

@@ -2,7 +2,16 @@ import type { Card, CardType, FieldGroup } from '../types'
 
 export const CARD_TYPES: CardType[] = ['Nave', 'Orden', 'Piloto', 'Gear']
 
-export const SHIP_ROLES = ['Acorazado', 'Caza', 'Soporte']
+export const SHIP_ROLES = [
+  'Caza',
+  'Corbeta',
+  'Fragata',
+  'Destructor',
+  'Crucero',
+  'Acorazado',
+  'Titán',
+  'Soporte',
+]
 export const ORDER_SUBTYPES = ['Instantánea', 'Pasiva', 'Reacción']
 export const ORDER_TIMINGS = ['Tu turno', 'Turno del rival', 'Reacción']
 
@@ -120,4 +129,5 @@ export const FACTION_PREFIX: Record<string, string> = {
   CyberPunk: 'CP',
   IA: 'IA',
   SteamPunk: 'SP',
+  Neutral: 'NT',
 }

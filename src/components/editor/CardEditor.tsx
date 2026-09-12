@@ -165,6 +165,7 @@ export default function CardEditor({ card, onChange }: Props) {
           <SegmentedField
             label="Rol"
             value={card.rol ?? 'Acorazado'}
+            wrap
             onChange={(value) => patch({ rol: value })}
             options={SHIP_ROLES.map((rol) => ({
               value: rol,

@@ -13,8 +13,17 @@ export type FactionId =
   | 'CyberPunk'
   | 'IA'
   | 'SteamPunk'
+  | 'Neutral'
 
-export type ShipRole = 'Acorazado' | 'Caza' | 'Soporte'
+export type ShipRole =
+  | 'Caza'
+  | 'Corbeta'
+  | 'Fragata'
+  | 'Destructor'
+  | 'Crucero'
+  | 'Acorazado'
+  | 'Titán'
+  | 'Soporte'
 
 export type OrderSubtype = 'Instantánea' | 'Pasiva' | 'Reacción'
 
@@ -77,7 +86,7 @@ export interface FactionTheme {
   bgTo: string
   artFrom: string
   artTo: string
-  pattern: 'grid' | 'scan' | 'organic' | 'neon' | 'geometric' | 'gears'
+  pattern: 'grid' | 'scan' | 'organic' | 'neon' | 'geometric' | 'gears' | 'stars'
 }
 
 export type FieldGroup =

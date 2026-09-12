@@ -339,6 +339,27 @@
   box-shadow: 0 6px 16px rgba(47, 190, 232, 0.25);
 }
 
+.segmented.is-wrap {
+  grid-auto-flow: row;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.segmented.is-wrap .seg-btn {
+  height: 38px;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  padding: 4px 4px;
+}
+
+.segmented.is-wrap .seg-btn span {
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* ---------------- Artwork ---------------- */
 
 .drop-zone {

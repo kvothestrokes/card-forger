@@ -160,13 +160,14 @@ interface SegmentedProps {
   value: string
   options: { value: string; icon?: ReactNode }[]
   onChange: (value: string) => void
+  wrap?: boolean
 }
 
-export function SegmentedField({ label, value, options, onChange }: SegmentedProps) {
+export function SegmentedField({ label, value, options, onChange, wrap }: SegmentedProps) {
   return (
     <div className="field field-wide">
       <span className="field-label">{label}</span>
-      <div className="segmented" role="group">
+      <div className={`segmented${wrap ? ' is-wrap' : ''}`} role="group">
         {options.map((option) => (
           <button
             key={option.value}
