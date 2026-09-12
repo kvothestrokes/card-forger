@@ -71,9 +71,9 @@ export default function App() {
           </span>
           <div className="brand-text">
             <h1>
-              CARD<span>FORGE</span>
+              CARD<span>FORGER</span>
             </h1>
-            <p>FLEET CARD FABRICATION TERMINAL · v1.0</p>
+            <p>FLEET CARD FABRICATION TERMINAL · v1.0 by <span style={{ color: '#ff0000', fontWeight: 'bold', fontSize: '0.7rem' }}>KvotheStrokes</span></p>
           </div>
         </div>
 

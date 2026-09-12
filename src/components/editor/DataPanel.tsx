@@ -13,7 +13,7 @@ export default function DataPanel({ card, onClose }: Props) {
 
   const json = useMemo(() => {
     const clone: Card = { ...card, palabras_clave: extractKeywords(card.texto_efecto ?? '') }
-    if (clone.artwork) clone.artwork = '<object-url:local>'
+    if (clone.artwork) clone.artwork = '<data-url:local>'
     return JSON.stringify(clone, null, 2)
   }, [card])
 

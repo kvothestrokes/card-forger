@@ -7,7 +7,7 @@ interface Props {
 
 const ACCEPTED = ['image/png', 'image/jpeg', 'image/webp']
 
-/** Carga local de arte. Nunca se sube a ningún servidor: sólo object URL en memoria. */
+/** Carga local de arte. Se guarda como data URL para que el export PNG no rompa blob: URLs. */
 export default function ArtworkUploader({ artwork, onChange }: Props) {
   const inputRef = useRef<HTMLInputElement>(null)
   const [dragging, setDragging] = useState(false)
@@ -21,7 +21,13 @@ export default function ArtworkUploader({ artwork, onChange }: Props) {
         return
       }
       setError(null)
-      onChange(URL.createObjectURL(file))
+      const reader = new FileReader()
+      reader.onload = () => {
+        if (typeof reader.result === 'string') onChange(reader.result)
+        else setError('No se pudo leer la imagen.')
+      }
+      reader.onerror = () => setError('No se pudo leer la imagen.')
+      reader.readAsDataURL(file)
     },
     [onChange],
   )

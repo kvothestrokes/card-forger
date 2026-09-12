@@ -14,7 +14,7 @@ export default function CardArtwork({ artwork, theme, nombre }: Props) {
   if (artwork) {
     return (
       <div className="card-art">
-        <img className="card-art-img" src={artwork} alt={nombre} crossOrigin="anonymous" />
+        <img className="card-art-img" src={artwork} alt={nombre} />
         <div className="card-art-vignette" />
         <div className="card-art-hud" />
       </div>

@@ -2,14 +2,12 @@ import { forwardRef } from 'react'
 import type { CSSProperties } from 'react'
 import type { Card } from '../../types'
 import { getFactionTheme, factionCssVars } from '../../utils/getFactionTheme'
-import { extractKeywords } from '../../utils/extractKeywords'
 import { CardTypeIcon, IconGear, RoleIcon } from '../icons/Symbology'
 import CardArtwork from './CardArtwork'
 import CardCost from './CardCost'
 import CardEffect from './CardEffect'
 import CardFaction from './CardFaction'
 import CardHeader from './CardHeader'
-import CardKeywords from './CardKeywords'
 import CardStats from './CardStats'
 
 interface Props {
@@ -22,7 +20,6 @@ interface Props {
  */
 const CardFrame = forwardRef<HTMLDivElement, Props>(function CardFrame({ card }, ref) {
   const theme = getFactionTheme(card.faccion)
-  const keywords = extractKeywords(card.texto_efecto ?? '')
 
   return (
     <div
@@ -49,11 +46,10 @@ const CardFrame = forwardRef<HTMLDivElement, Props>(function CardFrame({ card },
 
         <div className="card-body">
           <CardHeader card={card} />
-          <CardKeywords keywords={keywords} />
 
           <CardEffect
             texto={card.texto_efecto}
-            fitKey={`${card.tipo}|${keywords.length}|${card.bono_al_enlazar ?? ''}|${card.bono_sin_enlazar ?? ''}|${card.nombre}`}
+            fitKey={`${card.tipo}|${card.bono_al_enlazar ?? ''}|${card.bono_sin_enlazar ?? ''}|${card.nombre}`}
           >
             {card.tipo === 'Piloto' && (
               <div className="link-blocks">

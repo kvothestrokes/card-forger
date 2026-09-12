@@ -20,6 +20,13 @@
   user-select: none;
 }
 
+/* html-to-image reinicia las animaciones en el clon; eso desplaza badges y stats. */
+.card.is-exporting,
+.card.is-exporting * {
+  animation: none !important;
+  transition: none !important;
+}
+
 .card-inner {
   position: absolute;
   inset: 0;
@@ -221,21 +228,7 @@
   opacity: 0.55;
 }
 
-/* ---------------- Keywords ---------------- */
-
-.card-keywords {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px;
-  min-height: 0;
-}
-
-.card-keywords.is-dense .kw-badge {
-  padding: 4px 10px;
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
-}
+/* ---------------- Keywords (inline in effect text) ---------------- */
 
 .kw-badge {
   --kw: var(--f-primary);
