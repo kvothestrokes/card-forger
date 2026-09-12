@@ -78,8 +78,6 @@
 .cost-badge {
   position: absolute;
   top: 13px;
-  display: grid;
-  place-items: center;
   width: 68px;
   height: 68px;
   z-index: 4;
@@ -88,7 +86,10 @@
 .cost-badge::before {
   content: '';
   position: absolute;
-  inset: 0;
+  left: 0;
+  top: 0;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
   background: radial-gradient(circle at 50% 45%, rgba(6, 9, 15, 0.92), rgba(4, 6, 11, 0.82));
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
@@ -102,26 +103,44 @@
   right: 13px;
 }
 
-.cost-glyph {
+.cost-layer {
   position: absolute;
-  display: grid;
-  place-items: center;
+  left: 0;
+  top: 0;
+  width: 68px;
+  height: 68px;
+}
+
+.cost-glyph {
   filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+}
+
+.cost-glyph svg {
+  display: block;
+  width: 68px;
+  height: 68px;
+  overflow: visible;
 }
 
 .cost-resources .cost-glyph svg circle:first-child {
   fill-opacity: 0.7;
 }
 
-.cost-value {
-  position: relative;
+.cost-value-svg {
+  overflow: visible;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.7));
+}
+
+.cost-value-svg text {
   font-family: var(--font-display);
-  font-size: 28px;
   font-weight: 700;
-  line-height: 1;
-  color: #ffffff;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
-  animation: stat-pop 260ms ease;
+}
+
+/* html-to-image / foreignObject no centra igual grid+absolute ni los drop-shadow. */
+.card.is-exporting .cost-glyph,
+.card.is-exporting .cost-value-svg {
+  filter: none;
 }
 
 /* ---------------- Glifos de esquina ---------------- */
